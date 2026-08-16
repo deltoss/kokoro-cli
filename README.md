@@ -1,33 +1,32 @@
 # CLI Tools
 
-A Deno CLI wrapper around [`kokoro-js`](https://www.npmjs.com/package/kokoro-js).
+A Deno CLI wrapper around
+[`kokoro-js`](https://www.npmjs.com/package/kokoro-js).
 
-## Run from source
+## Install
+
+Install `kokoro` as a global Deno script:
+
+```nu
+deno task install
+```
+
+## Usage
 
 ```nu
 # Pass text as arguments
-deno run dev Hello world --output "sound.wav"
+kokoro Hello world --output "sound.wav"
 
-# Show the generated help:
-deno run dev --help
+# Show help
+kokoro --help
 
-# Pipe text through stdin:
-"Hello world" | deno run dev--output "sound.wav"
+# Pipe text through stdin
+"Hello world" | kokoro --output "sound.wav"
 ```
 
-## Build and run the binary
+## Development
 
 ```nu
-deno task compile
-```
-
-Compile CLI binaries to `/bin`
-
-```nu
-# Pass text as arguments
-bin/kokoro Hello world --output "sound.wav"
-
-# Pipe text via stdin
-"Hello world" | bin/kokoro --output "sound.wav"
+deno task dev Hello world --output "sound.wav"
 ```
 

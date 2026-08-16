@@ -16,6 +16,18 @@ const DEFAULT_DEVICE = "cpu";
 await new Command()
   .name("kokoro")
   .description("Custom CLI wrapper around kokoro.js")
+  .example(
+    "Generate speech",
+    "kokoro -o speech.wav 'Hello from Kokoro'",
+  )
+  .example(
+    "Read text from stdin",
+    "'Hello from stdin' | kokoro -o speech.wav",
+  )
+  .example(
+    "Choose a voice",
+    "kokoro --voice af_bella -o speech.wav 'Hello'",
+  )
   .globalType("log-level", logLevelType)
   .globalEnv("DEBUG=<enable:boolean>", "Enable debug output.")
   .globalOption("--debug", "Enable debug output.")

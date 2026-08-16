@@ -5,22 +5,15 @@ A Deno CLI wrapper around
 
 ## Run from source
 
-From this directory, pass text as arguments:
-
 ```nu
-deno run main.ts Hello world
-```
+# Pass text as arguments
+deno run dev Hello world
 
-Or pipe text through stdin:
+# Show the generated help:
+deno run dev --help
 
-```nu
-"Hello world" | deno run main.ts
-```
-
-Show the generated help:
-
-```nu
-deno run main.ts --help
+# Pipe text through stdin:
+"Hello world" | deno run dev
 ```
 
 ## Build and run the binary
@@ -31,14 +24,11 @@ deno task compile
 
 Compile CLI binaries to `/bin`
 
-Pass text as arguments:
-
 ```nu
-../../bin/kokoro Hello world
+# Pass text as arguments
+bin/kokoro Hello world
+
+# Pipe text via stdin
+"Hello world" | bin/kokoro
 ```
 
-Or pipe text through stdin:
-
-```nu
-"Hello world" | ../../bin/kokoro
-```

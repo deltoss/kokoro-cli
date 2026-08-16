@@ -1,6 +1,7 @@
 {
   "tasks": {
     "dev": "deno run --allow-net --allow-read --allow-write --allow-env --allow-ffi src/main.ts",
+    "compile": "deno compile --allow-net --allow-read --allow-write --allow-env --allow-ffi --self-extracting --output bin/kokoro src/main.ts",
     "install": "deno install --global --force --name kokoro --config deno.json --allow-net --allow-read --allow-write --allow-env --allow-ffi src/main.ts"
   },
   "imports": {

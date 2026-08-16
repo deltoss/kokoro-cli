@@ -1,4 +1,4 @@
-import { KokoroTTS, type GenerateOptions } from "kokoro-js";
+import { type GenerateOptions, KokoroTTS } from "kokoro-js";
 import { Command, EnumType } from "@cliffy/command";
 
 const logLevelType = new EnumType(["debug", "info", "warn", "error"]);
@@ -26,16 +26,24 @@ await new Command()
   .option("-o, --output <path:string>", "The file to save the TTS output to.", {
     required: true,
   })
-  .option("-v, --voice <voice:string>", "The voice to use.", {
-    default: DEFAULT_VOICE,
-  })
+  .option(
+    "-v, --voice <voice:string>",
+    "The voice to use. See https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX#samples",
+    {
+      default: DEFAULT_VOICE,
+    },
+  )
   .option("-m, --model <model:string>", "The model to use.", {
     default: DEFAULT_MODEL,
   })
   .type("device", deviceType)
-  .option("-d, --device <device:device>", "The device to use for the TTS. 'wasm', 'webgpu' (web) or 'cpu' (node). If using 'webgpu', we recommend using dtype='fp32'.", {
-    default: "cpu",
-  })
+  .option(
+    "-d, --device <device:device>",
+    "The device to use for the TTS. 'wasm', 'webgpu' (web) or 'cpu' (node). If using 'webgpu', we recommend using dtype='fp32'.",
+    {
+      default: "cpu",
+    },
+  )
   .action(async (options, ...words) => {
     if (!words.length && Deno.stdin.isTerminal()) {
       console.error("Provide text as arguments or through stdin.");
@@ -52,8 +60,8 @@ await new Command()
     });
 
     if (!isVoice(options.voice, tts)) {
-       console.error(`Unknown voice: ${options.voice}`);
-       Deno.exit(1);
+      console.error(`Unknown voice: ${options.voice}`);
+      Deno.exit(1);
     }
 
     const audio = await tts.generate(text, {
